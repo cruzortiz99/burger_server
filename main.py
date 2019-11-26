@@ -1,6 +1,8 @@
 from flask import Flask
+from config import Dev, Prod
 
 app = Flask(__name__)
+app.config.from_object(Dev)
 
 if __name__ == '__main__':
-  app.run(host='localhost', port=3000,debug=True)
+    app.run()

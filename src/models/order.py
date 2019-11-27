@@ -1,4 +1,5 @@
 class Order():
+
     def __init__(self, burgers):
         self.burgers = burgers
 

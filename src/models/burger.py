@@ -6,8 +6,8 @@ class Burger():
         self.nro_jamon = kwargs['nro_jamon']
         self.nro_pollo = kwargs['nro_pollo']
         self.nro_chuleta = kwargs['nro_chuleta']
-        pass
 
+    @property.getter
     def price(self):
         price = (self.nro_carnes*1) + (self.nro_tocineta*1) + (self.nro_queso*1) + \
             (self.nro_jamon*1) + (self.nro_pollo*1) + (self.nro_chuleta*1)

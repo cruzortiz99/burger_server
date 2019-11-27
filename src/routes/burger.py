@@ -4,11 +4,16 @@ from flask import request
 def burger_routes(app):
     '''
     Burger routes
+
+    - post:/burger
+    - get:/burger
+    - get:/burger/{id}
+
+    Parameters
+    ----
+
     - app: Flask object
 
-    * post:/burger
-    * get:/burger
-    * get:/burger/{id}
     '''
     base_url = '/burger'
 

@@ -4,6 +4,11 @@ from flask import request
 def user_routes(app):
     '''
     User routes
+    - post:/login
+    - post:/logout
+
+    Parameters
+    ----
     - app: Flask object
     '''
     base_url = '/'

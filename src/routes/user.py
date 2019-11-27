@@ -7,10 +7,15 @@ def user_routes(app):
     - app: Flask object
     '''
     base_url = '/'
-    @app.route(f'{base_url}', methods=['POST'])
+
+    @app.route(f'{base_url}/login', methods=['POST'])
     def login():
-        raise Exception("must implement this method")
+        raise Exception('must implement this method')
+
+    @app.route(f'{base_url}/logout', methods=['POST'])
+    def logout():
+        raise Exception('must implement this method')
 
     @app.route(f'{base_url}test', methods=['GET'])
-    def home():
+    def test():
         return '<h1>Hola Mundo</h1>'

@@ -1,5 +1,9 @@
 from flask import request
 
+from ..models.burger import Burger
+from ..models.ingrediente import Ingrediente
+from ..models.ingrediente_hamburgesa import Ingrediente_Hamburguesa
+
 
 def burger_routes(app):
     '''
@@ -31,4 +35,8 @@ def burger_routes(app):
 
     @app.route(f'{base_url}/test', methods=['GET'])
     def test_burger():
+        ingrediente = Ingrediente('Carne', 50)
+        ingrediente_hamburguesa = Ingrediente_Hamburguesa(ingrediente, 2)
+        burger = Burger([ingrediente_hamburguesa])
+        print(burger.__dict__, burger.price)
         return '<h1>New Burger</h1>'

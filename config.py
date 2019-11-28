@@ -1,5 +1,5 @@
 class Config():
-    PORT = 8000
+    PORT = 5000
     HOST = "localhost"
 
 

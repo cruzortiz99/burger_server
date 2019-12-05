@@ -1,5 +1,13 @@
-# Quasar Flask Burger App
+# Katalina App (katalina-server)
 
-Este es un proyecto de entrenamiento para el desarrollo de aplicaciones, utilizando:
+## Install the dependencies
 
-- Python con Flask
+```bash
+pip install -r requirement.txt
+```
+
+### Start the app
+
+```bash
+python main.py
+```

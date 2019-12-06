@@ -8,7 +8,7 @@ class Entity():
     def get_by_id(self, id):
         raise Exception("debe implementar este elemento")
 
-    def get_delete(self, id):
+    def delete(self, id):
         raise Exception("debe implementar este elemento")
 
     def update(self, id, entity):

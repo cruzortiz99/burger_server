@@ -1,4 +1,5 @@
 from flask import request
+from ..repository.user import User
 
 
 def user_routes(app):
@@ -23,4 +24,6 @@ def user_routes(app):
 
     @app.route(f'{base_url}test', methods=['GET'])
     def test():
+        user = User('Cruz', '123456', 'sdsdsa@gmail.com')
+        user.save()
         return '<h1>Hola Mundo</h1>'

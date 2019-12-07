@@ -14,7 +14,15 @@ class User(Entity):
         json_file = open(path, 'r', encoding='utf-8')
         users = json.load(json_file)
         json_file.close()
-        users.append(self.__dict__)
+        exists = len([user for user in users if user['email']
+                      == self.email]) > 0
+        if exists:
+            for user in users:
+                if user['email'] == self.email:
+                    user['name'] = self.name
+                    user['password'] = self.password
+        else:
+            users.append(self.__dict__)
         json_file = open(path, 'w', encoding='utf-8')
         users_saved = json.dump(users, fp=json_file)
         json_file.close()

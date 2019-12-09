@@ -4,25 +4,28 @@ from pathlib import Path
 
 
 class User(Entity):
-    def __init__(self, name, password, email):
-        self.name = name
-        self.password = password
-        self.email = email
+    _path = Path(__file__).parent.joinpath('..', 'db', 'user.json')
 
-    def save(self):
-        path = Path(__file__).parent.joinpath('..', 'db', 'user.json')
-        json_file = open(path, 'r', encoding='utf-8')
-        users = json.load(json_file)
+    def save(user):
+        json_file = open(User._path, 'r', encoding='utf-8')
+        json_users = json.load(json_file)
         json_file.close()
-        exists = len([user for user in users if user['email']
-                      == self.email]) > 0
+        exists = len([json_user for json_user in json_users if json_user['email']
+                      == user.email]) > 0
         if exists:
-            for user in users:
-                if user['email'] == self.email:
-                    user['name'] = self.name
-                    user['password'] = self.password
+            for json_user in json_users:
+                if json_user['email'] == user.email:
+                    json_user['name'] = user.name
+                    json_user['password'] = user.password
         else:
-            users.append(self.__dict__)
-        json_file = open(path, 'w', encoding='utf-8')
-        users_saved = json.dump(users, fp=json_file)
+            json_users.append(self.__dict__)
+        json_file = open(User._path, 'w', encoding='utf-8')
+        json.dump(json_users, fp=json_file)
         json_file.close()
+        return [json_user for json_user in json_users if json_user['email'] == user.email][0]
+
+    def get_by_id(id):
+        json_file = open(User._path, 'r', encoding='utf-8')
+        json_users = json.load(json_file)
+        json_file.close()
+        return [user for user in json_users if user['email'] == id][0]

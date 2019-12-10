@@ -1,4 +1,4 @@
-from ..domain.repositories.user import User as repository
+from ..domain.repositories import user as repository
 
 
 def save_user(user):

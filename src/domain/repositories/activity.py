@@ -25,12 +25,12 @@ def get_all_activities(email):
     return [json_activity for json_activity in json_activities if json_activity['email'] == email]
 
 
-def update_activity(id, activity):
+def update_activity(activity):
     json_file = open(path, 'r', encoding='utf-8')
     json_activities = load(json_file)
     found = False
     for json_activity in json_activities:
-        if json_activity['id'] == id and json_activity == activity.email:
+        if json_activity['id'] == activity.id and json_activity == activity.email:
             json_activity['date'] = activity.date
             activity['event'] = activity.event
             found = true

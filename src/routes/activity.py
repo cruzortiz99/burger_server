@@ -1,4 +1,5 @@
 from flask import request
+from ..controllers import activity as controller
 
 
 def activities_routes(app):
@@ -17,16 +18,16 @@ def activities_routes(app):
 
     @app.route(f'{base_url}', methods=['GET'])
     def get_all_user_activities():
-        raise Exception('method must be implemented')
+        return controller.get_all_user_activities()
 
     @app.route(f'{base_url}', methods=['POST'])
     def save_activity():
-        raise Exception('method must be implemented')
+        return controller.save_activity()
 
     @app.route(f'{base_url}', methods=['PUT'])
     def update_activity():
-        raise Exception('method must be implemented')
+        return controller.update_activity()
 
     @app.route(f'{base_url}', methods=['DELETE'])
     def delete_activity():
-        raise Exception('method must be implemented')
+        return controller.delete_activity()

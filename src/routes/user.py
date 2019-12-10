@@ -1,6 +1,6 @@
 from flask import request
-from ..repository.user import User as repository
-from ..models.users.user import User
+from ..domain.entities.users.user import User
+from ..controllers import user as user_controller
 
 
 def user_routes(app):
@@ -17,18 +17,16 @@ def user_routes(app):
 
     @app.route(f'{base_url}/login', methods=['POST'])
     def login():
-        return repository.get_by_id(id='cruzortiz099@gmail.com')
+        return user_controller.get_by_id('cruzortiz099@gmail.com')
 
     @app.route(f'{base_url}/logout', methods=['POST'])
     def logout():
-        raise Exception('must implement this method')
+        return true
 
     @app.route(f'{base_url}sign-in', methods=['POST'])
     def sign_in():
-        user = User('Cruz', '123456', 'sdsdsa@gmail.com')
-        raise repository.save(user)
+        return user_controller.save_user(user)
 
     @app.route(f'{base_url}test', methods=['GET'])
     def test():
-        user = User('Cruz', '123456', 'sdsdsa@gmail.com')
-        return repository.save(user)
+        return user_controller.save_user(user)

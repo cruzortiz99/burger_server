@@ -1,9 +1,9 @@
-from .entities import Entity
+from .repository import Repository
 import json
 from pathlib import Path
 
 
-class User(Entity):
+class User(Repository):
     _path = Path(__file__).parent.joinpath('..', 'db', 'user.json')
 
     def save(user):

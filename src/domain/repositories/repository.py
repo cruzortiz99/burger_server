@@ -1,4 +1,4 @@
-class Entity():
+class Repository():
     def save(self):
         raise Exception("debe implementar este elemento")
 

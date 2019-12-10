@@ -1,7 +1,7 @@
 from flask import Flask
 from config import Dev, Prod
 from src.routes.user import user_routes
-from src.routes.activities import activities_routes
+from src.routes.activity import activities_routes
 
 app = Flask(__name__)
 

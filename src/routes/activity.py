@@ -18,7 +18,7 @@ def activities_routes(app):
 
     @app.route(f'{base_url}', methods=['GET'])
     def get_all_user_activities():
-        return controller.get_all_user_activities()
+        return controller.get_all_user_activities('cruzortiz099@gmail.com')
 
     @app.route(f'{base_url}', methods=['POST'])
     def save_activity():

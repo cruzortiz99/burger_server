@@ -39,11 +39,12 @@ def update_activity(activity):
     return activity
 
 
-def delete_activity(id, email):
+def delete_activity(ident, email):
     json_file = open(path, 'r', encoding='utf-8')
     json_file.close()
     json_activities = load(json_file)
-    new_json_activities = [json_activity for json_activity in json_activities if json_activity['id'] not id and json_activity['email'] not email]
+    new_json_activities = [json_activity for json_activity in json_activities if json_activity['id']
+                           is not ident and json_activity['email'] is not email]
     json_file = open(path, 'w', encoding='utf.8')
     dump(new_json_activities, json_file)
     return true

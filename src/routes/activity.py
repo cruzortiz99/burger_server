@@ -1,5 +1,6 @@
 from flask import request
 from ..controllers import activity as controller
+from ..domain.entities.activity.activity import Activities
 
 
 def activities_routes(app):
@@ -22,13 +23,15 @@ def activities_routes(app):
 
     @app.route(f'{base_url}', methods=['POST'])
     def save_activity():
-        request_activity = request.form
-        return controller.save_activity()
+        request_activity = Activities(
+            request.form['email'], request.form['date'], request.form['event'])
+        return controller.save_activity(request_activity)
 
     @app.route(f'{base_url}', methods=['PUT'])
     def update_activity():
-        request_activity = request.form
-        return controller.update_activity()
+        request_activity = Activities(
+            request.form['email'], request.form['date'], request.form['event'])
+        return controller.update_activity(request_activity)
 
     @app.route(f'{base_url}/<int:id>/<email>', methods=['DELETE'])
     def delete_activity(id, email):

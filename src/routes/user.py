@@ -29,4 +29,4 @@ def user_routes(app):
 
     @app.route(f'{base_url}test', methods=['GET'])
     def test():
-        return user_controller.save_user(user)
+        return user_controller.save_user('None')

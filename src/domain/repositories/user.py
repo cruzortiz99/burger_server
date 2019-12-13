@@ -2,7 +2,7 @@ from json import load, dump
 from pathlib import Path
 
 
-path = Path(__file__).parent.joinpath('..', 'db', 'user.json')
+path = Path(__file__).parent.joinpath('..', '..', 'db', 'user.json')
 
 
 def save(user):
@@ -17,7 +17,7 @@ def save(user):
                 json_user['name'] = user.name
                 json_user['password'] = user.password
     else:
-        json_users.append(self.__dict__)
+        json_users.append(user.__dict__)
     json_file = open(path, 'w', encoding='utf-8')
     dump(json_users, fp=json_file)
     json_file.close()

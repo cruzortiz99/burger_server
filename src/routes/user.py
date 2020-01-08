@@ -1,6 +1,8 @@
-from flask import request
+from flask import request, make_response
 from ..domain.entities.users.user import User
 from ..controllers import user as user_controller
+from numbers import Number
+import json
 
 
 def user_routes(app):
@@ -15,18 +17,24 @@ def user_routes(app):
     '''
     base_url = '/'
 
-    @app.route(f'{base_url}/login', methods=['POST'])
+    @app.route(f'{base_url}login', methods=['POST'])
     def login():
-        return user_controller.get_by_id('cruzortiz099@gmail.com')
+        controller_response = user_controller.login(json.loads(request.data))
+        response = controller_response[0]
+        status = controller_response[1]
+        response = make_response(response, status)
+        response.headers['Content-Type'] = 'applicaiton/json'
+        return response
 
-    @app.route(f'{base_url}/logout', methods=['POST'])
+    @app.route(f'{base_url}logout', methods=['POST'])
     def logout():
         return true
 
     @app.route(f'{base_url}sign-in', methods=['POST'])
     def sign_in():
-        return user_controller.save_user(user)
+        return user_controller.save_user(json.loads(request.data))
 
     @app.route(f'{base_url}test', methods=['GET'])
     def test():
-        return user_controller.save_user('None')
+        user = User('Cruz Ortiz', 'example@example.com', '123456')
+        return user_controller.save_user(user)

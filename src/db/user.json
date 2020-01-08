@@ -1,1 +1,12 @@
-[{"name": "Cruz Ortiz", "email": "cruzortiz099.gmail.com", "password": 123456}, {"name": "Cruz", "email": "123456", "password": "sdsdsa@gmail.com"}]
+[
+  {
+    "name": "Cruz Ortiz",
+    "email": "cruzortiz099@gmail.com",
+    "password": "123456"
+  },
+  {
+    "name": "Cruz",
+    "email": "123456",
+    "password": "sdsdsa@gmail.com"
+  }
+]

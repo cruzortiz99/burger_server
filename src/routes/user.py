@@ -2,6 +2,7 @@ from flask import request, make_response
 from ..domain.entities.users.user import User
 from ..controllers import user as user_controller
 from numbers import Number
+from .cors import add_cors_to_response, cors_preflight_response
 import json
 
 
@@ -17,24 +18,28 @@ def user_routes(app):
     '''
     base_url = '/'
 
-    @app.route(f'{base_url}login', methods=['POST'])
+    @app.route(f'{base_url}login', methods=['POST', 'OPTIONS'])
     def login():
+        if request.method.upper() == 'OPTIONS'.upper():
+            return cors_preflight_response()
         controller_response = user_controller.login(json.loads(request.data))
-        response = controller_response[0]
-        status = controller_response[1]
-        response = make_response(response, status)
+        response = make_response(
+            controller_response[0], controller_response[1])
         response.headers['Content-Type'] = 'applicaiton/json'
-        return response
+        return add_cors_to_response(response)
 
     @app.route(f'{base_url}logout', methods=['POST'])
     def logout():
-        return true
+        return True
 
     @app.route(f'{base_url}sign-in', methods=['POST'])
     def sign_in():
         return user_controller.save_user(json.loads(request.data))
 
-    @app.route(f'{base_url}test', methods=['GET'])
+    @app.route(f'{base_url}test', methods=['GET', 'OPTIONS'])
     def test():
+        if request.method.upper() == 'options'.upper():
+            return cors_preflight_response()
         user = User('Cruz Ortiz', 'example@example.com', '123456')
-        return user_controller.save_user(user)
+        response = make_response(user_controller.save_user(user), 200)
+        return add_cors_to_response(response)

@@ -11,7 +11,10 @@ def save_user(requestBody):
     '''
     local_user = User(requestBody['name'],
                       requestBody['email'], requestBody['password'])
-    return repository.save(local_user)
+    try:
+        return next(repository.save(local_user))
+    except StopIteration:
+        return {}, 400
 
 
 def login(requestBody):
@@ -21,8 +24,9 @@ def login(requestBody):
     ----
     - requestBody:{email:str, password:str}, user email and password
     '''
-    user_dic = repository.get_by_id(requestBody['email'])
-    if user_dic is None:
+    try:
+        user_dic = next(repository.get_by_id(requestBody['email']))
+    except StopIteration:
         return {}, 400
     if user_dic['password'] != requestBody['password']:
         return {}, 403

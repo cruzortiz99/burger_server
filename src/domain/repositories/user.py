@@ -21,11 +21,12 @@ def save(user):
     json_file = open(path, 'w', encoding='utf-8')
     dump(json_users, fp=json_file)
     json_file.close()
-    return [json_user for json_user in json_users if json_user['email'] == user.email][0]
+    return (json_user for json_user in json_users
+            if json_user['email'] == user.email)
 
 
 def get_by_id(id):
     json_file = open(path, 'r', encoding='utf-8')
     json_users = load(json_file)
     json_file.close()
-    return [user for user in json_users if user['email'] == id][0]
+    return (user for user in json_users if user['email'] == id)

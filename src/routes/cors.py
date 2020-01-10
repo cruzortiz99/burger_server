@@ -1,3 +1,6 @@
+from flask import make_response
+
+
 def cors_preflight_response():
     '''
     Make an empty cors header to the response

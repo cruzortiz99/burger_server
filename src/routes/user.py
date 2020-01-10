@@ -28,13 +28,22 @@ def user_routes(app):
         response.headers['Content-Type'] = 'applicaiton/json'
         return add_cors_to_response(response)
 
-    @app.route(f'{base_url}logout', methods=['POST'])
+    @app.route(f'{base_url}logout', methods=['POST', 'OPTIONS'])
     def logout():
-        return True
+        if request.method.upper() == 'OPTIONS'.upper():
+            return cors_preflight_response()
+        return add_cors_to_response(make_response(True, 200))
 
-    @app.route(f'{base_url}sign-in', methods=['POST'])
+    @app.route(f'{base_url}sign-in', methods=['POST', 'OPTIONS'])
     def sign_in():
-        return user_controller.save_user(json.loads(request.data))
+        if request.method.upper() == 'OPTIONS'.upper():
+            return cors_preflight_response()
+        controller_response = user_controller.save_user(
+            json.loads(request.data))
+        response = make_response(
+            controller_response[0], controller_response[1])
+        response.headers["Content-Type"] = "application/json"
+        return add_cors_to_response(response)
 
     @app.route(f'{base_url}test', methods=['GET', 'OPTIONS'])
     def test():

@@ -12,9 +12,11 @@ def save_user(requestBody):
     local_user = User(requestBody['name'],
                       requestBody['email'], requestBody['password'])
     try:
-        return next(repository.save(local_user))
+        return next(repository.save(local_user)), 200
     except StopIteration:
         return {}, 400
+    except PermissionError:
+        return {}, 403
 
 
 def login(requestBody):

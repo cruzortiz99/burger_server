@@ -12,10 +12,7 @@ def save(user):
     exists = len([json_user for json_user in json_users if json_user['email']
                   == user.email]) > 0
     if exists:
-        for json_user in json_users:
-            if json_user['email'] == user.email:
-                json_user['name'] = user.name
-                json_user['password'] = user.password
+        raise PermissionError("User already on db")
     else:
         json_users.append(user.__dict__)
     json_file = open(path, 'w', encoding='utf-8')

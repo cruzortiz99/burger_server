@@ -45,6 +45,24 @@ def user_routes(app):
         response.headers["Content-Type"] = "application/json"
         return add_cors_to_response(response)
 
+    @app.route(f'{base_url}user/<email>', methods=['GET', 'OPTIONS'])
+    def getUser(email):
+        if request.method.upper() == 'OPTIONS'.upper():
+            return cors_preflight_response()
+        controller_response = user_controller.getUser(email)
+        response = make_response(
+            controller_response[0], controller_response[1])
+        return add_cors_to_response(response)
+
+    @app.route(f'{base_url}user/<email>', methods=['POST', 'OPTIONS'])
+    def updateUser(email):
+        if request.method.upper() == 'OPTIONS'.upper():
+            return cors_preflight_response()
+        controller_response = user_controller.updateUser(
+            email, json.loads(request.data))
+        response = make_response(controller_response)
+        return add_cors_to_response(response)
+
     @app.route(f'{base_url}test', methods=['GET', 'OPTIONS'])
     def test():
         if request.method.upper() == 'options'.upper():

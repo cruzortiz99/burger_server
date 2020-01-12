@@ -43,3 +43,20 @@ def login(requestBody):
     user_dic_with_token.update(user_dic)
     user_dic_with_token.update(token=token)
     return user_dic_with_token, 200
+
+
+def getUser(email):
+    try:
+        return next(repository.get_by_id(email)), 200
+    except StopIteration:
+        return {}, 404
+
+
+def updateUser(email, requestBody):
+    local_user = User(requestBody['name'], requestBody['email'], '')
+    try:
+        return next(repository.update(email, local_user)), 200
+    except StopIteration:
+        {}, 404
+    except FileNotFoundError:
+        {}, 404

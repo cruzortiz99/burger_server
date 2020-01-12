@@ -7,7 +7,7 @@ def save_user(requestBody):
     Logical process to save a user
     Parameters:
     ----
-    - requestBody: User , user entity
+    - requestBody: {name: str, email: str, password: str} , user entity
     '''
     local_user = User(requestBody['name'],
                       requestBody['email'], requestBody['password'])
@@ -46,6 +46,11 @@ def login(requestBody):
 
 
 def getUser(email):
+    '''
+    Get user by email
+    ----
+    - email: str, email of the user
+    '''
     try:
         return next(repository.get_by_id(email)), 200
     except StopIteration:
@@ -53,6 +58,12 @@ def getUser(email):
 
 
 def updateUser(email, requestBody):
+    '''
+    Update user by email
+    ----
+    - email: str, email of the user
+    - requestBody: {name: str, email: str}, request accepted
+    '''
     local_user = User(requestBody['name'], requestBody['email'], '')
     try:
         return next(repository.update(email, local_user)), 200

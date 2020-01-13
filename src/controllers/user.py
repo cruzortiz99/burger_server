@@ -14,9 +14,9 @@ def save_user(requestBody):
     try:
         return next(repository.save(local_user)), 200
     except StopIteration:
-        return {}, 400
+        return {'msj': 'Request has an error'}, 400
     except PermissionError:
-        return {}, 403
+        return {'msj': 'User Already exists'}, 403
 
 
 def login(requestBody):
@@ -29,9 +29,9 @@ def login(requestBody):
     try:
         user_dic = next(repository.get_by_id(requestBody['email']))
     except StopIteration:
-        return {}, 400
+        return {'msj': 'User was not found'}, 404
     if user_dic['password'] != requestBody['password']:
-        return {}, 403
+        return {'msj': 'User or password were wrong'}, 403
     '''
     - name: str
     '''
@@ -54,7 +54,7 @@ def getUser(email):
     try:
         return next(repository.get_by_id(email)), 200
     except StopIteration:
-        return {}, 404
+        return {'msj': 'User not found'}, 404
 
 
 def updateUser(email, requestBody):
@@ -67,7 +67,5 @@ def updateUser(email, requestBody):
     local_user = User(requestBody['name'], requestBody['email'], '')
     try:
         return next(repository.update(email, local_user)), 200
-    except StopIteration:
-        {}, 404
-    except FileNotFoundError:
-        {}, 404
+    except (StopIteration, FileNotFoundError):
+        {'msj': 'User not found'}, 404

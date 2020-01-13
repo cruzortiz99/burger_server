@@ -68,5 +68,7 @@ def user_routes(app):
         if request.method.upper() == 'options'.upper():
             return cors_preflight_response()
         user = User('Cruz Ortiz', 'example@example.com', '123456')
-        response = make_response(user_controller.save_user(user), 200)
+        controller_response = user_controller.save_user(user.__dict__)
+        response = make_response(
+            controller_response[0], controller_response[1])
         return add_cors_to_response(response)

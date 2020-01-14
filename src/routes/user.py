@@ -20,6 +20,13 @@ def user_routes(app):
 
     @app.route(f'{base_url}login', methods=['POST', 'OPTIONS'])
     def login():
+        '''
+        Login method
+        ----
+        Return:
+        ----
+        - response object
+        '''
         if request.method.upper() == 'OPTIONS'.upper():
             return cors_preflight_response()
         controller_response = user_controller.login(json.loads(request.data))
@@ -30,12 +37,26 @@ def user_routes(app):
 
     @app.route(f'{base_url}logout', methods=['POST', 'OPTIONS'])
     def logout():
+        '''
+        Logout function
+        ----
+        Return:
+        ----
+        - response object
+        '''
         if request.method.upper() == 'OPTIONS'.upper():
             return cors_preflight_response()
         return add_cors_to_response(make_response(True, 200))
 
     @app.route(f'{base_url}sign-in', methods=['POST', 'OPTIONS'])
     def sign_in():
+        '''
+        Registration process
+        ----
+        Return:
+        ----
+        - response object
+        '''
         if request.method.upper() == 'OPTIONS'.upper():
             return cors_preflight_response()
         controller_response = user_controller.save_user(
@@ -47,6 +68,16 @@ def user_routes(app):
 
     @app.route(f'{base_url}user/<email>', methods=['GET', 'OPTIONS'])
     def getUser(email):
+        '''
+        Get one user by email
+        ----
+        Parameters:
+        ----
+        - email: str, identifier of the user
+        Return:
+        ----
+        - response object
+        '''
         if request.method.upper() == 'OPTIONS'.upper():
             return cors_preflight_response()
         controller_response = user_controller.getUser(email)
@@ -56,6 +87,16 @@ def user_routes(app):
 
     @app.route(f'{base_url}user/<email>', methods=['POST', 'OPTIONS'])
     def updateUser(email):
+        '''
+        Update user, by email
+        ----
+        Parameters:
+        ----
+        - email: str, email of the user
+        Return:
+        ----
+        - response object
+        '''
         if request.method.upper() == 'OPTIONS'.upper():
             return cors_preflight_response()
         controller_response = user_controller.updateUser(
@@ -65,6 +106,9 @@ def user_routes(app):
 
     @app.route(f'{base_url}test', methods=['GET', 'OPTIONS'])
     def test():
+        '''
+        Test api method
+        '''
         if request.method.upper() == 'options'.upper():
             return cors_preflight_response()
         user = User('Cruz Ortiz', 'example@example.com', '123456')

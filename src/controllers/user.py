@@ -5,9 +5,13 @@ from ..domain.entities.users.user import User
 def save_user(requestBody):
     '''
     Logical process to save a user
+    ----
     Parameters:
     ----
     - requestBody: {name: str, email: str, password: str} , user entity
+    Return:
+    ----
+    - tuple with the user saved/error msj and status
     '''
     local_user = User(requestBody['name'],
                       requestBody['email'], requestBody['password'])
@@ -22,8 +26,8 @@ def save_user(requestBody):
 def login(requestBody):
     '''
     Logical process to get a user
-    Parameters:
     ----
+    Parameters:
     - requestBody:{email:str, password:str}, user email and password
     '''
     try:
@@ -32,9 +36,6 @@ def login(requestBody):
         return {'msj': 'User was not found'}, 404
     if user_dic['password'] != requestBody['password']:
         return {'msj': 'User or password were wrong'}, 403
-    '''
-    - name: str
-    '''
     name = user_dic['name']
     email = user_dic['email']
     password = user_dic['password']
@@ -49,6 +50,8 @@ def getUser(email):
     '''
     Get user by email
     ----
+    Parameters:
+    ----
     - email: str, email of the user
     '''
     try:
@@ -60,6 +63,8 @@ def getUser(email):
 def updateUser(email, requestBody):
     '''
     Update user by email
+    ----
+    Parameters:
     ----
     - email: str, email of the user
     - requestBody: {name: str, email: str}, request accepted

@@ -2,11 +2,16 @@ import datetime
 
 
 class Activities():
-    _id = 0
+    '''
+    Activity model
+    ----
+    - email: str, user email
+    - event: List[str], event message list
+    - date: str, of the date time format YYYY-MM-dd
+    '''
 
-    def __init__(self, email, event, date=datetime.datetime.now):
-        Activities._id += 1
-        self.id = Activities._id
+    def __init__(self, email, events=[], date=datetime.datetime.now()
+                 .strftime('%Y-%m-%d')):
         self.email = email
         self.date = date
-        self.event = event
+        self.events = events

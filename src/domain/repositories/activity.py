@@ -1,30 +1,51 @@
 from pathlib import Path
 from json import load, dump
+from .utils import read_from_db, write_into_db
+
 path = Path(__file__).parent.joinpath('..', '..', 'db', 'activity.json')
 
 
 def save_activity(activity):
+    '''
+    Save the activity in the bd
+    ----
+    Parameters:
+    - activity: Activity, data model
+    Return:
+    ----
+    - Activity saved
+    '''
     json_file = open(path, 'r', encoding='utf-8')
     json_activities = load(json_file)
     json_file.close()
-    exists = len([json_activity for json_activity in json_activities if json_activity['email']
-                  == activity.email and json_activity['id'] == activity.id]) > 0
+    exists = len([json_activity for json_activity in json_activities
+                  if json_activity['email'] == activity.email
+                  and json_activity['date'] == activity.date]) > 0
     if exists:
-        print(activity.__dict__)
-        raise Exception('registro existente')
-    json_activities.append(activity.__dict__)
-    print(json_activities)
-    json_file = open(path, 'w', encoding='utf-8')
-    dump(json_activities, fp=json_file)
-    json_file.close()
-    return activity
+        for event_of_the_day in json_activities:
+            same_email = event_of_the_day['email'] == activity.email
+            same_date = event_of_the_day['date'] == activity.date
+            if same_email and same_date:
+                event_of_the_day = activity.__dict__
+    else:
+        json_activities.append(activity.__dict__)
+    return write_into_db(path, json_activities)
 
 
 def get_all_activities(email):
-    json_file = open(path, 'r', encoding='utf-8')
-    json_activities = load(json_file)
-    json_file.close()
-    return [json_activity for json_activity in json_activities if json_activity['email'] == email]
+    '''
+    Get all activities associated with the user
+    ----
+    Parameter:
+    ----
+    - email: str, user identifier
+    Return:
+    ----
+    - generator with the activities
+    '''
+    json_activities = read_from_db(path)
+    return (json_activity for json_activity in json_activities
+            if json_activity['email'] == email)
 
 
 def update_activity(activity):

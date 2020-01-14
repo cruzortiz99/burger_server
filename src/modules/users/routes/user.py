@@ -1,6 +1,6 @@
 from flask import Blueprint, request, make_response
-from src.users.domain.entities.user import User
-from src.users.controllers import user as user_controller
+from src.modules.users.domain.entities.user import User
+from src.modules.users.controllers import user as user_controller
 from src.utils.cors import add_cors_to_response, cors_preflight_response
 from numbers import Number
 import json

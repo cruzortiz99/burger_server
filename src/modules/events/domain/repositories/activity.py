@@ -2,7 +2,8 @@ from pathlib import Path
 from json import load, dump
 from src.utils.repositories import read_from_db, write_into_db
 
-path = Path(__file__).parent.joinpath('..', '..', '..', 'db', 'activity.json')
+path = Path(__file__).parent.joinpath(
+    '..', '..', '..', '..', 'db', 'activity.json')
 
 
 def save_activity(activity):

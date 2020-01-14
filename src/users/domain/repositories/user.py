@@ -2,7 +2,7 @@ from json import load, dump
 from pathlib import Path
 
 
-path = Path(__file__).parent.joinpath('..', '..', 'db', 'user.json')
+path = Path(__file__).parent.joinpath('..', '..', '..', 'db', 'user.json')
 
 
 def save(user):

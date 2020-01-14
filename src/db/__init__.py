@@ -1,9 +1,9 @@
 from pathlib import Path
-import json
+from json import dump
 
 _activities_entity = Path(__file__).parent.joinpath(
-    '..', 'db', 'activity.json')
-_user_entity = Path(__file__).parent.joinpath('..', 'db', 'user.json')
+    '.', 'activity.json')
+_user_entity = Path(__file__).parent.joinpath('.', 'user.json')
 
 
 def create_db_iterable():
@@ -14,7 +14,7 @@ def create_db_iterable():
             yield file_path.name
         except FileNotFoundError:
             json_file = open(file_path, 'w')
-            json.dump([], json_file)
+            dump([], json_file)
             json_file.close()
             yield file_path.name
 

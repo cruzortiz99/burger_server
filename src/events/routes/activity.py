@@ -1,7 +1,7 @@
 from flask import Blueprint, request, make_response
-from ..controllers import activity as controller
-from ..domain.entities.activity.activity import Activities
-from .cors import add_cors_to_response, cors_preflight_response
+from src.events.controllers import activity as controller
+from src.events.domain.entities.activity import Activities
+from src.utils.cors import add_cors_to_response, cors_preflight_response
 import json
 
 router = Blueprint('activity', __name__)

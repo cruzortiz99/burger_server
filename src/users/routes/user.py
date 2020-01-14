@@ -1,8 +1,8 @@
 from flask import Blueprint, request, make_response
-from ..domain.entities.users.user import User
-from ..controllers import user as user_controller
+from src.users.domain.entities.user import User
+from src.users.controllers import user as user_controller
+from src.utils.cors import add_cors_to_response, cors_preflight_response
 from numbers import Number
-from .cors import add_cors_to_response, cors_preflight_response
 import json
 
 router = Blueprint('user', __name__)

@@ -1,5 +1,5 @@
-from ..domain.repositories import user as repository
-from ..domain.entities.users.user import User
+from src.users.domain.repositories import user as repository
+from src.users.domain.entities.user import User
 
 
 def save_user(requestBody):

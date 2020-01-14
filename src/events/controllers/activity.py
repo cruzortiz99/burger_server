@@ -1,5 +1,5 @@
-from ..domain.repositories import activity as repository
-from ..domain.entities.activity.activity import Activities
+from src.events.domain.repositories import activity as repository
+from src.events.domain.entities.activity import Activities
 import json
 
 

@@ -1,8 +1,8 @@
 from pathlib import Path
 from json import load, dump
-from .utils import read_from_db, write_into_db
+from src.utils.repositories import read_from_db, write_into_db
 
-path = Path(__file__).parent.joinpath('..', '..', 'db', 'activity.json')
+path = Path(__file__).parent.joinpath('..', '..', '..', 'db', 'activity.json')
 
 
 def save_activity(activity):
@@ -54,7 +54,9 @@ def update_activity(activity):
     found = False
     print(activity.__dict__)
     for json_activity in json_activities:
-        if json_activity['id'] == activity.id and json_activity['email'] == activity.email:
+        same_id = json_activity['id'] == activity.id
+        same_email = json_activity['email'] == activity.email
+        if same_id and same_email:
             json_activity['date'] = activity.date
             json_activity['event'] = activity.event
             found = True
@@ -70,9 +72,12 @@ def delete_activity(ident, email):
     json_file = open(path, 'r', encoding='utf-8')
     json_activities = load(json_file)
     json_file.close()
-    new_json_activities = [json_activity for json_activity in json_activities if json_activity['id']
+    new_json_activities = [json_activity for json_activity in json_activities
+                           if json_activity['id']
                            != ident or json_activity['email'] != email]
     json_file = open(path, 'w', encoding='utf-8')
     dump(new_json_activities, fp=json_file)
     json_file.close()
-    return [json_activity for json_activity in json_activities if json_activity['id'] == ident and json_activity['email'] == email]
+    return [json_activity for json_activity in json_activities
+            if json_activity['id'] == ident
+            and json_activity['email'] == email]

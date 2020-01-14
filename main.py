@@ -1,8 +1,8 @@
 from flask import Flask
 from config import Dev, Prod
-from src.domain import create_db
-from src.routes.user import router as user_router
-from src.routes.activity import router as activity_router
+from src.db import create_db
+from src.users.routes.user import router as user_router
+from src.events.routes.activity import router as activity_router
 
 create_db()
 app = Flask(__name__)

@@ -1,7 +1,7 @@
 import datetime
 
 
-class Activities():
+class Events():
     '''
     Activity model
     ----

@@ -1,5 +1,5 @@
-from src.modules.events.domain.repositories import activity as repository
-from src.modules.events.domain.entities.activity import Activities
+from src.modules.events.domain.repositories import events as repository
+from src.modules.events.domain.entities.events import Events
 import json
 
 
@@ -28,7 +28,7 @@ def save_activity(requestBody):
     ----
     - tuple with the response body and status
     '''
-    activity = Activities(
+    activity = Events(
         email=requestBody['email'], date=requestBody['date'],
         events=requestBody['events'])
     activity_saved = repository.save_activity(activity)

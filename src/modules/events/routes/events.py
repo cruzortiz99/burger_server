@@ -1,10 +1,10 @@
 from flask import Blueprint, request, make_response
-from src.modules.events.controllers import activity as controller
-from src.modules.events.domain.entities.activity import Activities
+from src.modules.events.controllers import events as controller
+from src.modules.events.domain.entities.events import Events
 from src.utils.cors import add_cors_to_response, cors_preflight_response
 import json
 
-router = Blueprint('activity', __name__)
+router = Blueprint('events', __name__)
 
 
 @router.route('/<email>', methods=['GET', 'OPTIONS'])
@@ -49,7 +49,7 @@ def save_activity():
 @router.route('/<int:id>', methods=['PUT'])
 def update_activity(id):
     json_request = json.loads(request.data)
-    request_activity = Activities(
+    request_activity = Events(
         email=json_request['email'], date=json_request['date'],
         events=json_request['events'])
     request_activity.id = id

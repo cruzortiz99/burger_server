@@ -3,6 +3,7 @@ from src.modules.users.domain.entities.user import User
 from src.modules.users.controllers import user as user_controller
 from src.utils.cors import add_cors_to_response, cors_preflight_response
 from numbers import Number
+from src.modules.users.gql.schema import schema as user_schema
 import json
 
 router = Blueprint('user', __name__)
@@ -110,4 +111,14 @@ def test():
     controller_response = user_controller.save_user(user.__dict__)
     response = make_response(
         controller_response[0], controller_response[1])
+    return add_cors_to_response(response)
+
+
+@router.route('graphql', methods=['POST', 'OPTIONS'])
+def graphql_user():
+    if request.method.upper() == 'options'.upper():
+        return cors_preflight_response()
+    requestBody = json.loads(request.data)['query']
+    gql_response = user_schema.execute(requestBody)
+    response = make_response(json.dumps(gql_response.data))
     return add_cors_to_response(response)

@@ -2,41 +2,31 @@
   {
     "id": 1,
     "email": "cruzortiz099@gmail.com",
-    "date": "11-12-24",
-    "events": [
-      "Checking create"
-    ]
+    "date": "2020/12/24",
+    "messages": ["Checking create"]
   },
   {
     "id": 2,
     "email": "cruzortiz099@gmail.com",
-    "date": "6-12-2019",
-    "events": [
-      "Clase"
-    ]
+    "date": "2020/01/01",
+    "messages": ["Clase"]
   },
   {
     "id": 3,
     "email": "cruzortiz099@gmail.com",
-    "date": "",
-    "events": [
-      "Checking create"
-    ]
+    "date": "2020/01/02",
+    "messages": ["Checking create"]
   },
   {
     "id": 4,
     "email": "cruzortiz099@gmail.com",
-    "date": "",
-    "events": [
-      "Checking create"
-    ]
+    "date": "2020/02/02",
+    "messages": ["Checking create"]
   },
   {
     "id": 5,
     "email": "cruzortiz099@gmail.com",
-    "date": "",
-    "events": [
-      "Checking create"
-    ]
+    "date": "2020/03/10",
+    "messages": ["Checking create"]
   }
 ]

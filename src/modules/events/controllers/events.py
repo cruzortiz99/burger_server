@@ -30,7 +30,7 @@ def save_activity(requestBody):
     '''
     activity = Events(
         email=requestBody['email'], date=requestBody['date'],
-        events=requestBody['events'])
+        messages=requestBody['events'])
     activity_saved = repository.save_activity(activity)
     return json.dumps(activity_saved.__dict__), 200
 

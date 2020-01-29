@@ -10,8 +10,8 @@ class Events():
     - date: str, of the date time format YYYY-MM-dd
     '''
 
-    def __init__(self, email, events=[], date=datetime.datetime.now()
+    def __init__(self, email, messages=[], date=datetime.datetime.now()
                  .strftime('%Y-%m-%d')):
         self.email = email
         self.date = date
-        self.events = events
+        self.messages = messages

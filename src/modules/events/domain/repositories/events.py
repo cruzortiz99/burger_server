@@ -9,7 +9,7 @@ path = Path(__file__).parent.joinpath(
 def save_activity(activity):
     '''
     Save the activity in the bd
-    ----
+
     Parameters:
     - activity: Activity, data model
     Return:
@@ -27,7 +27,7 @@ def save_activity(activity):
             same_email = event_of_the_day['email'] == activity.email
             same_date = event_of_the_day['date'] == activity.date
             if same_email and same_date:
-                event_of_the_day = activity.__dict__
+                event_of_the_day['messages'] = activity.messages
     else:
         json_activities.append(activity.__dict__)
     return write_into_db(path, json_activities)

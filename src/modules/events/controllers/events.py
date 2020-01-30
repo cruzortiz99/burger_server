@@ -1,5 +1,6 @@
 from src.modules.events.domain.repositories import events as repository
 from src.modules.events.domain.entities.events import Events
+from re import compile
 import json
 
 
@@ -20,7 +21,7 @@ def get_all_user_activities(email):
 def save_activity(requestBody):
     '''
     Save activity of the user process
-    ----
+
     Parameters:
     ----
     - requestBody: {email:str, date: str, events: List[str]}
@@ -28,16 +29,22 @@ def save_activity(requestBody):
     ----
     - tuple with the response body and status
     '''
-    activity = Events(
-        email=requestBody['email'], date=requestBody['date'],
-        messages=requestBody['events'])
-    activity_saved = repository.save_activity(activity)
-    return json.dumps(activity_saved.__dict__), 200
+    try:
+        activity = Events(
+            email=requestBody['email'],
+            messages=requestBody['messages'], date=requestBody['date'])
+        activity_saved = repository.save_activity(activity)
+        return json.dumps(activity_saved), 201
+    except Exception:
+        return {'message': "date format most be YYYY/MM/dd"}, 400
 
 
 def update_activity(activity):
     activity_updated = repository.update_activity(activity)
-    return json.dumps(activity_updated.__dict__)
+    try:
+        return json.dumps(activity_updated.__dict__), 201
+    except Exception:
+        return {'message': 'No event found'}
 
 
 def delete_activity(id, email):

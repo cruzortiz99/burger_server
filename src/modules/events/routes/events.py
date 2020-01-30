@@ -33,7 +33,7 @@ def get_all_user_activities(email):
 def save_activity():
     '''
     Save one activity of the user
-    ----
+
     Return:
     ----
     - response object

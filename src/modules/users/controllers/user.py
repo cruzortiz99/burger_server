@@ -8,10 +8,11 @@ def save_user(requestBody):
     ----
     Parameters:
     ----
-    - requestBody: {name: str, email: str, password: str} , user entity
+    :param {name: str, email: str, password: str} requestBody: user entity
+
     Return:
     ----
-    - tuple with the user saved/error msj and status
+    :return Tuple[json, int]: with the user saved/error msj and status
     '''
     local_user = User(requestBody['name'],
                       requestBody['email'], requestBody['password'])
@@ -28,7 +29,11 @@ def login(requestBody):
     Logical process to get a user
     ----
     Parameters:
-    - requestBody:{email:str, password:str}, user email and password
+    ----
+    :param {email:str, password:str} requestBody: user email and password
+    Return:
+    ----
+    :return Tuple[json, int]: json response and status
     '''
     try:
         user_dic = next(repository.get_by_id(requestBody['email']))
@@ -52,7 +57,10 @@ def getUser(email):
     ----
     Parameters:
     ----
-    - email: str, email of the user
+    :param str email: email of the user
+    Return:
+    ----
+    :return Tuple[json, int]: json response and status
     '''
     try:
         return next(repository.get_by_id(email)), 200
@@ -66,8 +74,12 @@ def updateUser(email, requestBody):
     ----
     Parameters:
     ----
-    - email: str, email of the user
-    - requestBody: {name: str, email: str}, request accepted
+    :param str email: email of the user
+
+    :param {name: str, email: str} requestBody: request accepted
+    Return:
+    ----
+    :return Tuple[json, int]: json response and status
     '''
     local_user = User(requestBody['name'], requestBody['email'], '')
     try:

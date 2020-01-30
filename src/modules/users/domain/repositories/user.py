@@ -7,6 +7,17 @@ path = Path(__file__).parent.joinpath(
 
 
 def save(user):
+    '''
+    Saves user in db
+    ----
+    Params:
+    ----
+    :param User user: user to save
+
+    Return:
+    ----
+    :return generator: users saved
+    '''
     json_file = open(path, 'r', encoding='utf-8')
     json_users = load(json_file)
     json_file.close()
@@ -24,6 +35,15 @@ def save(user):
 
 
 def get_by_id(id):
+    '''
+    Get user by email
+    ----
+    Parameters:
+    ----
+    :param str id: email of the user
+    Return:
+    :return generator: users with the same email
+    '''
     json_file = open(path, 'r', encoding='utf-8')
     json_users = load(json_file)
     json_file.close()
@@ -31,6 +51,19 @@ def get_by_id(id):
 
 
 def update(email, user):
+    '''
+    Updates user by email
+    ----
+    Parameters:
+    ----
+    :param str email: user email
+
+    :param User user: user model
+
+    Return:
+    ----
+    :return generator: with user updated
+    '''
     json_file = open(path, 'r', encoding='utf-8')
     json_users = load(json_file)
     json_file.close()

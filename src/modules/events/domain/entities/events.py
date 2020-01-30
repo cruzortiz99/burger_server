@@ -4,11 +4,15 @@ from re import compile
 
 class Events():
     '''
-    Activity model
+    Event model
     ----
-    - email: str, user email
-    - event: List[str], event message list
-    - date: str, of the date time format YYYY/MM/dd
+    Params:
+    ----
+    :param str email: user email
+
+    :param List[str] messages: event message list
+
+    :param str date: of the date time format YYYY/MM/dd
     '''
 
     def __init__(self, email, messages=[], date=datetime.datetime.now()

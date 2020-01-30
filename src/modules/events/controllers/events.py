@@ -9,10 +9,13 @@ def get_all_user_activities(email):
     Get all user activities as a json format
     ----
     Parameter:
-    - email: str, user identifier
     ----
+    :param str email: user identifier
+
     Return:
-    - tuple json format with the activities and the response status
+    ----
+    :return Tuple[json, int]: json format with the activities and
+    the response status
     '''
     activities = repository.get_all_activities(email)
     return json.dumps(list(activities)), 200
@@ -24,10 +27,11 @@ def save_activity(requestBody):
 
     Parameters:
     ----
-    - requestBody: {email:str, date: str, events: List[str]}
+    :param {email:str, date: str, events: List[str]} requestBody:
+
     Return:
     ----
-    - tuple with the response body and status
+    :return Tuple[json, int]: with the response body and status
     '''
     try:
         activity = Events(

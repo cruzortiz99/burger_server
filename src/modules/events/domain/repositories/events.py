@@ -1,6 +1,7 @@
 from pathlib import Path
 from json import load, dump
 from src.utils.repositories import read_from_db, write_into_db
+from src.modules.events.domain.entities.events import Events
 
 path = Path(__file__).parent.joinpath(
     '..', '..', '..', '..', 'db', 'activity.json')
@@ -9,12 +10,14 @@ path = Path(__file__).parent.joinpath(
 def save_activity(activity):
     '''
     Save the activity in the bd
-
+    ----
     Parameters:
-    - activity: Activity, data model
+    ----
+    :param Event activity: data model
+
     Return:
     ----
-    - Activity saved
+    :return json: activities saved in bd
     '''
     json_file = open(path, 'r', encoding='utf-8')
     json_activities = load(json_file)
@@ -39,10 +42,11 @@ def get_all_activities(email):
     ----
     Parameter:
     ----
-    - email: str, user identifier
+    :param str email: user identifier
+
     Return:
     ----
-    - generator with the activities
+    :return generator: generator with the activities
     '''
     json_activities = read_from_db(path)
     return (json_activity for json_activity in json_activities

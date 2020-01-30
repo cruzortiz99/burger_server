@@ -14,10 +14,10 @@ def get_all_user_activities(email):
     ----
     Parameters:
     ----
-    - email: str, user identifier
+    :param str email: user identifier
     Return:
     ----
-    - response object
+    :return response: Flask response object object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
@@ -33,10 +33,10 @@ def get_all_user_activities(email):
 def save_activity():
     '''
     Save one activity of the user
-
+    ----
     Return:
     ----
-    - response object
+    :return response: Flask response object
     '''
     if request.method.upper() == 'options'.upper():
         return cors_preflight_response()

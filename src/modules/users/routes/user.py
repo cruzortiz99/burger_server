@@ -15,7 +15,7 @@ def login():
     ----
     Return:
     ----
-    - response object
+    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
@@ -33,7 +33,7 @@ def logout():
     ----
     Return:
     ----
-    - response object
+    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
@@ -47,7 +47,7 @@ def sign_in():
     ----
     Return:
     ----
-    - response object
+    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
@@ -66,10 +66,11 @@ def getUser(email):
     ----
     Parameters:
     ----
-    - email: str, identifier of the user
+    :param str email: identifier of the user
+
     Return:
     ----
-    - response object
+    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
@@ -86,10 +87,11 @@ def updateUser(email):
     ----
     Parameters:
     ----
-    - email: str, email of the user
+    :param str email: email of the user
+
     Return:
     ----
-    - response object
+    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()

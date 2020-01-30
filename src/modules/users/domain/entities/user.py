@@ -2,11 +2,11 @@ class User():
     '''
     User entity model
     ----
-    - name:str, name of the user
+    :param str name: name of the user
 
-    - email:str, email and identifier of the user
+    :param str email: email and identifier of the user
 
-    - password:str, user password
+    :param str password: user password
     '''
 
     def __init__(self, name, email, password):

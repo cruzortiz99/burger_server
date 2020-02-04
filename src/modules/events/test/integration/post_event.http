@@ -1,0 +1,9 @@
+POST http://localhost:5000/event
+
+{
+  "email": "cruzortiz099@gmail.com",
+  "date": "2020/01/20",
+  "messages": [
+    "Testing"
+  ]
+}

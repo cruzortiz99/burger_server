@@ -11,10 +11,11 @@ router = Blueprint('events', __name__)
 def get_all_user_activities(email):
     '''
     Get all users activities
-    ----
+
     Parameters:
     ----
     :param str email: user identifier
+
     Return:
     ----
     :return response: Flask response object object
@@ -33,7 +34,7 @@ def get_all_user_activities(email):
 def save_activity():
     '''
     Save one activity of the user
-    ----
+
     Return:
     ----
     :return response: Flask response object
@@ -46,21 +47,38 @@ def save_activity():
     return add_cors_to_response(response)
 
 
-@router.route('/<int:id>', methods=['PUT'])
-def update_activity(id):
-    json_request = json.loads(request.data)
-    request_activity = Events(
-        email=json_request['email'], date=json_request['date'],
-        events=json_request['events'])
-    request_activity.id = id
-    response = make_response(controller.update_activity(request_activity))
+@router.route('', methods=['PUT', 'OPTION'])
+def update_activity():
+    '''
+    Updates an existing event
+
+    Return:
+    ----
+    :return response: Flask response object
+    '''
+    if request.method.upper() == 'option'.upper():
+        return cors_preflight_response()
+    request_body = json.loads(request.data)
+    response = make_response(controller.update_activity(request_body))
     response.headers['Content-Type'] = 'application/json'
-    return response
+    return add_cors_to_response(response)
 
 
-@router.route('/<int:id>', methods=['DELETE'])
-def delete_activity(id):
-    email = request.headers['token']
-    response = make_response(controller.delete_activity(id, email))
+@router.route('', methods=['DELETE', 'OPTION'])
+def delete_activity():
+    '''
+    Deletes an existing event
+
+    Return:
+    ----
+    :return response: Flask response object
+    '''
+    if request.method.upper() == 'option'.upper():
+        return cors_preflight_response()
+    request_body = json.loads(request.data)
+    response = make_response(
+        controller.delete_activity(
+            request_body['email'],
+            request_body['date']))
     response.headers['Content-Type'] = 'application/json'
-    return response
+    return add_cors_to_response(response)

@@ -5,8 +5,8 @@ from re import compile
 class Events():
     '''
     Event model
-    ----
-    Params:
+
+    Parameters:
     ----
     :param str email: user email
 

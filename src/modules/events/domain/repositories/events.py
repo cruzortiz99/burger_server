@@ -10,7 +10,7 @@ path = Path(__file__).parent.joinpath(
 def save_activity(activity):
     '''
     Save the activity in the bd
-    ----
+
     Parameters:
     ----
     :param Event activity: data model
@@ -39,8 +39,8 @@ def save_activity(activity):
 def get_all_activities(email):
     '''
     Get all activities associated with the user
-    ----
-    Parameter:
+
+    Parameters:
     ----
     :param str email: user identifier
 
@@ -54,35 +54,50 @@ def get_all_activities(email):
 
 
 def update_activity(activity):
+    '''
+    Update an activity
+
+    Parameters:
+    ----
+    :param Event activity: data to update
+
+    Return:
+    ----
+    :return json: json with activities
+    '''
     json_file = open(path, 'r', encoding='utf-8')
     json_activities = load(json_file)
     found = False
-    print(activity.__dict__)
     for json_activity in json_activities:
-        same_id = json_activity['id'] == activity.id
+        same_date = json_activity['date'] == activity.date
         same_email = json_activity['email'] == activity.email
-        if same_id and same_email:
-            json_activity['date'] = activity.date
-            json_activity['event'] = activity.event
+        if same_date and same_email:
+            json_activity['messages'] = activity.messages
             found = True
     if not found:
         raise Exception('no se encontró registro')
-    json_file = open(path, 'w', encoding='utf-8')
-    dump(json_activities, json_file)
-    json_file.close()
-    return activity
+    return write_into_db(path, json_activities)
 
 
-def delete_activity(ident, email):
+def delete_activity(email, date):
+    '''
+    Delete an event
+
+    Parameters:
+    ----
+    :param str email: email of the user
+
+    :param str date: date of the event
+
+    Return:
+    ----
+    :return json: json with activities
+    '''
     json_file = open(path, 'r', encoding='utf-8')
     json_activities = load(json_file)
     json_file.close()
     new_json_activities = [json_activity for json_activity in json_activities
-                           if json_activity['id']
-                           != ident or json_activity['email'] != email]
-    json_file = open(path, 'w', encoding='utf-8')
-    dump(new_json_activities, fp=json_file)
-    json_file.close()
-    return [json_activity for json_activity in json_activities
-            if json_activity['id'] == ident
-            and json_activity['email'] == email]
+                           if json_activity['email']
+                           != email or json_activity['date'] != date]
+    write_into_db(path, new_json_activities)
+    return new_json_activities

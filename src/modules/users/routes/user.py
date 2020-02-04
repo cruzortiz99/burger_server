@@ -12,7 +12,7 @@ router = Blueprint('user', __name__)
 def login():
     '''
     Login method
-    ----
+
     Return:
     ----
     :return response: Flask response object
@@ -30,7 +30,7 @@ def login():
 def logout():
     '''
     Logout function
-    ----
+
     Return:
     ----
     :return response: Flask response object
@@ -44,7 +44,7 @@ def logout():
 def sign_in():
     '''
     Registration process
-    ----
+
     Return:
     ----
     :return response: Flask response object
@@ -63,7 +63,7 @@ def sign_in():
 def getUser(email):
     '''
     Get one user by email
-    ----
+
     Parameters:
     ----
     :param str email: identifier of the user
@@ -84,7 +84,7 @@ def getUser(email):
 def updateUser(email):
     '''
     Update user, by email
-    ----
+
     Parameters:
     ----
     :param str email: email of the user

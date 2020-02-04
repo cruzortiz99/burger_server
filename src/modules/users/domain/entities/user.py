@@ -1,6 +1,8 @@
 class User():
     '''
     User entity model
+
+    Parameters:
     ----
     :param str name: name of the user
 

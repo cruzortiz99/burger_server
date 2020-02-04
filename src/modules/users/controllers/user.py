@@ -5,7 +5,7 @@ from src.modules.users.domain.entities.user import User
 def save_user(requestBody):
     '''
     Logical process to save a user
-    ----
+
     Parameters:
     ----
     :param {name: str, email: str, password: str} requestBody: user entity
@@ -27,10 +27,11 @@ def save_user(requestBody):
 def login(requestBody):
     '''
     Logical process to get a user
-    ----
+
     Parameters:
     ----
     :param {email:str, password:str} requestBody: user email and password
+
     Return:
     ----
     :return Tuple[json, int]: json response and status
@@ -54,10 +55,11 @@ def login(requestBody):
 def getUser(email):
     '''
     Get user by email
-    ----
+
     Parameters:
     ----
     :param str email: email of the user
+
     Return:
     ----
     :return Tuple[json, int]: json response and status
@@ -71,12 +73,13 @@ def getUser(email):
 def updateUser(email, requestBody):
     '''
     Update user by email
-    ----
+
     Parameters:
     ----
     :param str email: email of the user
 
     :param {name: str, email: str} requestBody: request accepted
+
     Return:
     ----
     :return Tuple[json, int]: json response and status

@@ -47,7 +47,7 @@ def save_activity():
     return add_cors_to_response(response)
 
 
-@router.route('', methods=['PUT', 'OPTION'])
+@router.route('', methods=['PUT', 'OPTIONS'])
 def update_activity():
     '''
     Updates an existing event
@@ -56,7 +56,7 @@ def update_activity():
     ----
     :return response: Flask response object
     '''
-    if request.method.upper() == 'option'.upper():
+    if request.method.upper() == 'options'.upper():
         return cors_preflight_response()
     request_body = json.loads(request.data)
     response = make_response(controller.update_activity(request_body))
@@ -64,7 +64,7 @@ def update_activity():
     return add_cors_to_response(response)
 
 
-@router.route('', methods=['DELETE', 'OPTION'])
+@router.route('', methods=['PATCH', 'OPTIONS'])
 def delete_activity():
     '''
     Deletes an existing event
@@ -73,7 +73,7 @@ def delete_activity():
     ----
     :return response: Flask response object
     '''
-    if request.method.upper() == 'option'.upper():
+    if request.method.upper() == 'options'.upper():
         return cors_preflight_response()
     request_body = json.loads(request.data)
     response = make_response(

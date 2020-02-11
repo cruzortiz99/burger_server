@@ -1,11 +1,11 @@
 class Config():
-    PORT = 5000
-    HOST = "localhost"
+    PORT: int = 5000
+    HOST: str = "localhost"
 
 
 class Dev(Config):
-    DEBUG = True
+    DEBUG: bool = True
 
 
 class Prod(Config):
-    DEBUG = False
+    DEBUG: bool = False

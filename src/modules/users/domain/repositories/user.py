@@ -1,28 +1,21 @@
 from json import load, dump
 from pathlib import Path
-
+from src.modules.users.domain.entities.user import User
+from typing import Any, List, Iterable
 
 path = Path(__file__).parent.joinpath(
     '..', '..', '..', '..', 'db', 'user.json')
 
 
-def save(user):
+def save(user: User) -> Iterable:
     '''
     Saves user in db
-
-    Params:
-    ----
-    :param User user: user to save
-
-    Return:
-    ----
-    :return generator: users saved
     '''
     json_file = open(path, 'r', encoding='utf-8')
-    json_users = load(json_file)
+    json_users: Any = load(json_file)
     json_file.close()
-    exists = len([json_user for json_user in json_users if json_user['email']
-                  == user.email]) > 0
+    exists: bool = len([json_user for json_user in json_users if json_user['email']
+                        == user.email]) > 0
     if exists:
         raise PermissionError("User already on db")
     else:
@@ -34,44 +27,26 @@ def save(user):
             if json_user['email'] == user.email)
 
 
-def get_by_id(id):
+def get_by_id(id: str) -> Iterable:
     '''
     Get user by email
-
-    Parameters:
-    ----
-    :param str id: email of the user
-
-    Return:
-    ----
-    :return generator: users with the same email
     '''
     json_file = open(path, 'r', encoding='utf-8')
-    json_users = load(json_file)
+    json_users: Any = load(json_file)
     json_file.close()
     return (user for user in json_users if user['email'] == id)
 
 
-def update(email, user):
+def update(email: str, user: User) -> Iterable:
     '''
     Updates user by email
-
-    Parameters:
-    ----
-    :param str email: user email
-
-    :param User user: user model
-
-    Return:
-    ----
-    :return generator: with user updated
     '''
     json_file = open(path, 'r', encoding='utf-8')
-    json_users = load(json_file)
+    json_users: Any = load(json_file)
     json_file.close()
-    users_with_same_email = [
+    users_with_same_email: List[dict] = [
         json_user for json_user in json_users if json_user['email'] == email]
-    exists = len(users_with_same_email) > 0
+    exists: bool = len(users_with_same_email) > 0
     if exists is False:
         raise FileNotFoundError('user doesn\'t exists')
     for user_find in users_with_same_email:

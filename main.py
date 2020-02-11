@@ -5,7 +5,7 @@ from src.modules.users.routes.user import router as user_router
 from src.modules.events.routes.events import router as events_router
 
 create_db()
-app = Flask(__name__)
+app: Flask = Flask(__name__)
 app.register_blueprint(user_router, url_prefix='/')
 app.register_blueprint(events_router, url_prefix='/event')
 

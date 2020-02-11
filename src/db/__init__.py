@@ -1,12 +1,16 @@
 from pathlib import Path
 from json import dump
+from typing import Generator
 
-_activities_entity = Path(__file__).parent.joinpath(
+_activities_entity: Path = Path(__file__).parent.joinpath(
     '.', 'activity.json')
-_user_entity = Path(__file__).parent.joinpath('.', 'user.json')
+_user_entity: Path = Path(__file__).parent.joinpath('.', 'user.json')
 
 
-def create_db_iterable():
+def create_db_iterable() -> Generator:
+    '''
+    Create a document DB for every path
+    '''
     paths = [_activities_entity, _user_entity]
     for file_path in paths:
         try:

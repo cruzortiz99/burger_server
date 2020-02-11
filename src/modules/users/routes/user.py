@@ -1,39 +1,33 @@
-from flask import Blueprint, request, make_response
+from flask import Blueprint, request, make_response, Response
 from src.modules.users.domain.entities.user import User
 from src.modules.users.controllers import user as user_controller
 from src.utils.cors import add_cors_to_response, cors_preflight_response
 from numbers import Number
+from typing import Tuple
 import json
 
-router = Blueprint('user', __name__)
+router: Blueprint = Blueprint('user', __name__)
 
 
 @router.route('login', methods=['POST', 'OPTIONS'])
-def login():
+def login() -> Response:
     '''
     Login method
-
-    Return:
-    ----
-    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
-    controller_response = user_controller.login(json.loads(request.data))
-    response = make_response(
+    controller_response: Tuple[dict, int] = user_controller.login(
+        json.loads(request.data))
+    response: Response = make_response(
         controller_response[0], controller_response[1])
     response.headers['Content-Type'] = 'applicaiton/json'
     return add_cors_to_response(response)
 
 
 @router.route('logout', methods=['POST', 'OPTIONS'])
-def logout():
+def logout() -> Response:
     '''
     Logout function
-
-    Return:
-    ----
-    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
@@ -41,75 +35,56 @@ def logout():
 
 
 @router.route('sign-in', methods=['POST', 'OPTIONS'])
-def sign_in():
+def sign_in() -> Response:
     '''
     Registration process
-
-    Return:
-    ----
-    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
-    controller_response = user_controller.save_user(
+    controller_response: Tuple[dict, int] = user_controller.save_user(
         json.loads(request.data))
-    response = make_response(
+    response: Response = make_response(
         controller_response[0], controller_response[1])
     response.headers["Content-Type"] = "application/json"
     return add_cors_to_response(response)
 
 
 @router.route('user/<email>', methods=['GET', 'OPTIONS'])
-def getUser(email):
+def getUser(email: str) -> Response:
     '''
     Get one user by email
-
-    Parameters:
-    ----
-    :param str email: identifier of the user
-
-    Return:
-    ----
-    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
-    controller_response = user_controller.getUser(email)
-    response = make_response(
+    controller_response: Tuple[dict, int] = user_controller.getUser(email)
+    response: Response = make_response(
         controller_response[0], controller_response[1])
     return add_cors_to_response(response)
 
 
 @router.route('user/<email>', methods=['POST', 'OPTIONS'])
-def updateUser(email):
+def updateUser(email: str) -> Response:
     '''
     Update user, by email
-
-    Parameters:
-    ----
-    :param str email: email of the user
-
-    Return:
-    ----
-    :return response: Flask response object
     '''
     if request.method.upper() == 'OPTIONS'.upper():
         return cors_preflight_response()
-    controller_response = user_controller.updateUser(
+    controller_response: Tuple[dict, int] = user_controller.updateUser(
         email, json.loads(request.data))
-    response = make_response(controller_response)
+    response: Response = make_response(controller_response)
     return add_cors_to_response(response)
 
 
 @router.route('test', methods=['GET', 'OPTIONS'])
-def test():
+def test() -> Response:
     '''
     Test api method
     '''
     if request.method.upper() == 'options'.upper():
         return cors_preflight_response()
-    user = User('Cruz Ortiz', 'example@example.com', '123456')
-    controller_response = user_controller.save_user(user.__dict__)
-    response = make_response(
+    user: User = User('Cruz Ortiz', 'example@example.com', '123456')
+    controller_response: Tuple[dict,
+                               int] = user_controller.save_user(user.__dict__)
+    response: Response = make_response(
         controller_response[0], controller_response[1])
     return add_cors_to_response(response)

@@ -1,17 +1,10 @@
 from json import dump, load
+from pathlib import Path
 
 
-def write_into_db(path, json_data):
+def write_into_db(path: Path, json_data: dict) -> dict:
     '''
     Write into the document on the path
-    ----
-    Parameters:
-    ----
-    - path: Path, path of the document
-    - json_data: str, json format data
-    Return:
-    ----
-    - json_data
     '''
     json_file = open(path, 'w', encoding='utf-8')
     dump(json_data, fp=json_file)
@@ -19,13 +12,9 @@ def write_into_db(path, json_data):
     return json_data
 
 
-def read_from_db(path):
+def read_from_db(path: Path) -> dict:
     '''
     Read json data from the path
-    ----
-    Parameters:
-    ----
-    - path: Path, path to the document
     '''
     json_file = open(path, 'r', encoding='utf-8')
     json_data = load(json_file)

@@ -1,13 +1,13 @@
 from pathlib import Path
 from json import dump
-from typing import Generator
+from typing import Iterator
 
 _activities_entity: Path = Path(__file__).parent.joinpath(
     '.', 'activity.json')
 _user_entity: Path = Path(__file__).parent.joinpath('.', 'user.json')
 
 
-def create_db_iterable() -> Generator:
+def create_db_iterable() -> Iterator:
     '''
     Create a document DB for every path
     '''
